@@ -69,9 +69,7 @@ export function Navbar() {
             <a href="#features" className="text-sm font-medium text-slate-300 hover:text-white px-3 py-1.5 rounded-full hover:bg-white/5 transition-colors cursor-pointer">
               Features
             </a>
-            <a href="#adaptive-templates" className="text-sm font-medium text-slate-300 hover:text-white px-3 py-1.5 rounded-full hover:bg-white/5 transition-colors cursor-pointer">
-              Templates
-            </a>
+
             <a href="#ai-intelligence" className="text-sm font-medium text-slate-300 hover:text-white px-3 py-1.5 rounded-full hover:bg-white/5 transition-colors cursor-pointer">
               AI Intelligence
             </a>
@@ -127,13 +125,7 @@ export function Navbar() {
             >
               Features
             </a>
-            <a 
-              href="#adaptive-templates" 
-              onClick={() => setMobileMenuOpen(false)}
-              className="text-slate-300 hover:text-white font-medium py-2 px-3 rounded-lg hover:bg-white/5 cursor-pointer"
-            >
-              Templates
-            </a>
+
             <a 
               href="#ai-intelligence" 
               onClick={() => setMobileMenuOpen(false)}

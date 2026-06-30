@@ -4,6 +4,7 @@ import { HeroSection } from "@/components/hero-section";
 import { WorkflowSection } from "@/components/workflow-section";
 import { FeaturesGrid } from "@/components/features-grid";
 import { AiIntelligenceSection } from "@/components/ai-intelligence-section";
+import { ComparisonSection } from "@/components/comparison-section";
 import { FaqSection } from "@/components/pricing-faq";
 
 export default function Home() {
@@ -15,6 +16,7 @@ export default function Home() {
         <WorkflowSection />
         <FeaturesGrid />
         <AiIntelligenceSection />
+        <ComparisonSection />
         <FaqSection />
       </main>
     </div>

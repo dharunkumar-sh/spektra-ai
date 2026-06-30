@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Check, X, Sparkles, AlertCircle, HelpCircle, Layers, ArrowRight } from "lucide-react";
+import { Check, X, Sparkles, Layers } from "lucide-react";
 
 export function ComparisonSection() {
   const COMPARISON_DATA = [
@@ -77,14 +77,6 @@ export function ComparisonSection() {
     }
   ];
 
-  const COMPETITORS = [
-    { name: "Swagger UI", role: "Passive Spec Renderer", limit: "Zero prose synthesis; rigid alphabetical layout." },
-    { name: "Redoc", role: "Static Three-Panel Layout", limit: "Requires tedious manual description writing in YAML." },
-    { name: "Postman Docs", role: "Collection Viewer", limit: "Focused on QA testing rather than public developer portals." },
-    { name: "GitBook / Mintlify", role: "MDX Static Generators", limit: "High maintenance burden; AI is bolted on rather than core." },
-    { name: "Manual Writing", role: "Handcrafted Engineering", limit: "Extreme time sink (80+ hrs/mo); perpetually out of sync." }
-  ];
-
   return (
     <section id="comparison" className="py-24 bg-[#07080e] relative border-t border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -101,23 +93,10 @@ export function ComparisonSection() {
           </p>
         </div>
 
-        {/* Competitor Breakdown Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-16">
-          {COMPETITORS.map((comp, idx) => (
-            <div key={idx} className="p-4 rounded-2xl bg-[#0c0d15] border border-white/10 flex flex-col justify-between">
-              <div>
-                <div className="font-bold text-sm text-white">{comp.name}</div>
-                <div className="text-[10px] font-mono text-indigo-400 mt-0.5">{comp.role}</div>
-                <p className="text-xs text-slate-400 mt-2.5 leading-relaxed">{comp.limit}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-
         {/* Matrix Table */}
         <div className="bg-[#0c0d16] border border-white/15 rounded-3xl overflow-hidden shadow-2xl">
           <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse min-w-[800px]">
+            <table className="w-full text-left border-collapse min-w-200">
               <thead>
                 <tr className="border-b border-white/10 bg-[#121424]">
                   <th className="py-5 px-6 text-xs font-bold uppercase tracking-wider text-slate-300 w-1/3">
@@ -137,7 +116,7 @@ export function ComparisonSection() {
               </thead>
               <tbody className="divide-y divide-white/5 text-xs sm:text-sm">
                 {COMPARISON_DATA.map((row, idx) => (
-                  <tr key={idx} className="hover:bg-white/[0.02] transition-colors">
+                  <tr key={idx} className="hover:bg-white/2 transition-colors">
                     <td className="py-4 px-6 font-medium text-slate-200">
                       <div>{row.feature}</div>
                       <div className="text-[11px] text-slate-500 font-normal mt-0.5">{row.note}</div>

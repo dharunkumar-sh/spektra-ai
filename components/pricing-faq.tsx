@@ -33,7 +33,7 @@ const FAQS: FaqItem[] = [
 ];
 
 export function FaqSection() {
-  const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
     <section id="faq" className="py-24 bg-[#060609] relative border-t border-white/10">
