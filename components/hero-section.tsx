@@ -8,8 +8,10 @@ import {
   Zap,
   ChevronRight,
 } from "lucide-react";
+import { useAuth } from "@/context/auth-context";
 
 export function HeroSection() {
+  const { openAuthModal } = useAuth();
   return (
     <section className="relative pt-32 pb-24 md:pt-40 md:pb-32 overflow-hidden">
       {/* Background Ambient Glows */}
@@ -50,13 +52,13 @@ export function HeroSection() {
 
           {/* EXACT Required CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-lg">
-            <Link
-              href="#workflow"
+            <button
+              onClick={() => openAuthModal()}
               className="w-full sm:w-auto flex items-center justify-center gap-2.5 h-13 px-8 rounded-xl bg-linear-to-r from-indigo-500 via-violet-600 to-cyan-500 text-white font-semibold text-sm shadow-xl shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:scale-[1.01] transition-all duration-200 cursor-pointer"
             >
               <Zap className="w-4 h-4 fill-white animate-pulse" />
               <span>Generate Documentation Free</span>
-            </Link>
+            </button>
 
             <Link
               href="#features"
