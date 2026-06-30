@@ -15,7 +15,6 @@ import {
   ShieldCheck,
   ArrowRight
 } from "lucide-react";
-import { GithubIcon } from "@/components/icons";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -133,24 +132,6 @@ export function Navbar() {
 
           {/* Status & CTA Actions - Right Aligned */}
           <div className="flex items-center gap-4 shrink-0">
-            {/* Live System Status Pill (Desktop only) */}
-            <div className="hidden lg:flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 rounded-full text-xs font-mono text-emerald-400 select-none">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-              <span>AI Engine v3.4 Online</span>
-            </div>
-
-            {/* GitHub Repo Button (Desktop only) */}
-            <a
-              href="https://github.com/dharunkumar-sh/spektra-ai"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden lg:flex items-center gap-2 text-xs font-medium text-slate-300 hover:text-white bg-[#1a1b26] hover:bg-[#242636] border border-white/10 px-3 py-2 rounded-xl transition-all cursor-pointer"
-            >
-              <GithubIcon className="w-4 h-4" />
-              <span>Star on GitHub</span>
-              <span className="bg-indigo-500/20 text-indigo-300 font-mono text-[10px] px-1.5 py-0.5 rounded">4.8k</span>
-            </a>
-
             {/* CTA Button (Desktop only) */}
             <a
               href="#interactive-generator"
