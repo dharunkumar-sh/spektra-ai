@@ -124,8 +124,8 @@ export function Navbar() {
               <a href="#comparison" className="text-sm font-medium text-slate-300 hover:text-white px-3 py-1.5 rounded-full hover:bg-white/5 transition-colors cursor-pointer">
                 Comparison
               </a>
-              <a href="#pricing" className="text-sm font-medium text-slate-300 hover:text-white px-3 py-1.5 rounded-full hover:bg-white/5 transition-colors cursor-pointer">
-                Pricing
+              <a href="#faq" className="text-sm font-medium text-slate-300 hover:text-white px-3 py-1.5 rounded-full hover:bg-white/5 transition-colors cursor-pointer">
+                FAQ
               </a>
             </nav>
           </div>
@@ -210,11 +210,11 @@ export function Navbar() {
               Interactive Live Portal
             </a>
             <a 
-              href="#pricing" 
+              href="#faq" 
               onClick={() => setMobileMenuOpen(false)}
               className="text-slate-300 hover:text-white font-medium py-2 px-3 rounded-lg hover:bg-white/5 cursor-pointer"
             >
-              Pricing Plans
+              FAQ
             </a>
           </div>
 

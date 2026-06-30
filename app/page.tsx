@@ -8,7 +8,7 @@ import { AiIntelligenceSection } from "@/components/ai-intelligence-section";
 import { ComparisonSection } from "@/components/comparison-section";
 import { LiveDocPreview } from "@/components/live-doc-preview";
 import { StatsTestimonials } from "@/components/stats-testimonials";
-import { PricingFaq } from "@/components/pricing-faq";
+import { FaqSection } from "@/components/pricing-faq";
 import { CtaFooter } from "@/components/cta-footer";
 
 export default function Home() {
@@ -24,7 +24,7 @@ export default function Home() {
         <ComparisonSection />
         <LiveDocPreview />
         <StatsTestimonials />
-        <PricingFaq />
+        <FaqSection />
       </main>
       <CtaFooter />
     </div>
