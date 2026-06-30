@@ -7,9 +7,9 @@ import { AdaptiveTemplates } from "@/components/adaptive-templates";
 import { AiIntelligenceSection } from "@/components/ai-intelligence-section";
 import { ComparisonSection } from "@/components/comparison-section";
 import { LiveDocPreview } from "@/components/live-doc-preview";
-import { StatsTestimonials } from "@/components/stats-testimonials";
+import { StatsSection } from "@/components/stats-testimonials";
 import { FaqSection } from "@/components/pricing-faq";
-import { CtaFooter } from "@/components/cta-footer";
+import { CtaSection } from "@/components/cta-footer";
 
 export default function Home() {
   return (
@@ -23,10 +23,10 @@ export default function Home() {
         <AiIntelligenceSection />
         <ComparisonSection />
         <LiveDocPreview />
-        <StatsTestimonials />
+        <StatsSection />
         <FaqSection />
       </main>
-      <CtaFooter />
+      <CtaSection />
     </div>
   );
 }
