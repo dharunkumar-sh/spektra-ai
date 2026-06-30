@@ -51,21 +51,21 @@ export function HeroSection() {
           </p>
 
           {/* EXACT Required CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-lg">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-2xl">
             <button
               onClick={() => openAuthModal()}
-              className="w-full sm:w-auto flex items-center justify-center gap-2.5 h-13 px-8 rounded-xl bg-linear-to-r from-indigo-500 via-violet-600 to-cyan-500 text-white font-semibold text-sm shadow-xl shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:scale-[1.01] transition-all duration-200 cursor-pointer"
+              className="w-full sm:w-auto flex items-center justify-center gap-3 h-14 px-10 rounded-xl bg-linear-to-r from-indigo-500 via-violet-600 to-cyan-500 text-white font-semibold text-base shadow-xl shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:scale-[1.01] transition-all duration-200 cursor-pointer"
             >
-              <Zap className="w-4 h-4 fill-white animate-pulse" />
-              <span>Generate Documentation Free</span>
+              <Zap className="w-5 h-5 fill-white animate-pulse" />
+              <span>Generate Documentation</span>
             </button>
 
             <Link
               href="#features"
-              className="w-full sm:w-auto flex items-center justify-center gap-2 h-13 px-8 rounded-xl bg-[#12131e] hover:bg-[#1c1d2c] border border-white/15 text-slate-200 font-semibold text-sm transition-all duration-200 cursor-pointer"
+              className="w-full sm:w-auto flex items-center justify-center gap-2.5 h-14 px-10 rounded-xl bg-[#12131e] hover:bg-[#1c1d2c] border border-white/15 text-slate-200 font-semibold text-base transition-all duration-200 cursor-pointer"
             >
               <span>Explore Features</span>
-              <ChevronRight className="w-4 h-4 text-indigo-400" />
+              <ChevronRight className="w-5 h-5 text-indigo-400" />
             </Link>
           </div>
 

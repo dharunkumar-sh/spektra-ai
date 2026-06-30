@@ -109,7 +109,7 @@ export function Navbar() {
               >
                 <span className="absolute inset-0 bg-gradient-to-r from-indigo-500 via-violet-500 to-cyan-500 group-hover:opacity-90 transition-opacity" />
                 <span className="relative flex items-center gap-2 px-4 py-2 rounded-[11px] bg-[#0c0d14] text-white transition-colors group-hover:bg-transparent">
-                  <span>Get Started Free</span>
+                  <span>Get Started</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                 </span>
               </button>
@@ -199,7 +199,7 @@ export function Navbar() {
                 }}
                 className="w-full text-center bg-gradient-to-r from-indigo-500 to-violet-600 text-white font-medium py-2.5 rounded-xl shadow-lg shadow-indigo-500/25 cursor-pointer text-sm"
               >
-                Get Started Free
+                Get Started
               </button>
             )}
           </div>
