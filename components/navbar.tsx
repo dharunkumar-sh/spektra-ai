@@ -19,7 +19,6 @@ import {
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [productDropdownOpen, setProductDropdownOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -41,8 +40,8 @@ export function Navbar() {
           : "bg-transparent py-5"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div className="flex items-center justify-between w-full h-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between w-full h-12">
           {/* Brand Logo - Left Aligned */}
           <div className="flex items-center shrink-0">
             <a href="#" className="flex items-center gap-2.5 group cursor-pointer">
@@ -62,79 +61,33 @@ export function Navbar() {
             </a>
           </div>
 
-          {/* Desktop Navigation Links - Mathematically Centered */}
-          <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center justify-center">
-            <nav className="flex items-center gap-1 bg-[#12131d]/60 border border-white/10 px-4 py-1.5 rounded-full backdrop-blur-sm">
-              {/* Product Dropdown Trigger */}
-              <div 
-                className="relative"
-                onMouseEnter={() => setProductDropdownOpen(true)}
-                onMouseLeave={() => setProductDropdownOpen(false)}
-              >
-                <button className="flex items-center gap-1.5 text-sm font-medium text-slate-300 hover:text-white px-3 py-1.5 rounded-full hover:bg-white/5 transition-colors cursor-pointer focus:outline-none">
-                  <span>Platform</span>
-                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-205 ${productDropdownOpen ? 'rotate-180 text-indigo-400' : ''}`} />
-                </button>
-
-                {/* Mega Dropdown Menu */}
-                {productDropdownOpen && (
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-80 bg-[#0d0e16]/95 border border-white/15 rounded-2xl p-3 shadow-2xl backdrop-blur-xl animate-in fade-in slide-in-from-top-2 duration-200">
-                    <div className="space-y-1">
-                      <a href="#interactive-generator" className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-white/5 transition-colors group/item cursor-pointer">
-                        <div className="p-2 rounded-lg bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 group-hover/item:bg-indigo-500 group-hover/item:text-white transition-colors">
-                          <Cpu className="w-4 h-4" />
-                        </div>
-                        <div>
-                          <div className="text-sm font-semibold text-white">AI Documentation Engine</div>
-                          <div className="text-xs text-slate-400 leading-relaxed">Transform OpenAPI & Postman into dynamic developer portals</div>
-                        </div>
-                      </a>
-                      <a href="#adaptive-templates" className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-white/5 transition-colors group/item cursor-pointer">
-                        <div className="p-2 rounded-lg bg-violet-500/10 border border-violet-500/20 text-violet-400 group-hover/item:bg-violet-500 group-hover/item:text-white transition-colors">
-                          <Layers className="w-4 h-4" />
-                        </div>
-                        <div>
-                          <div className="text-sm font-semibold text-white">Adaptive API Templates</div>
-                          <div className="text-xs text-slate-400 leading-relaxed">Tailored layouts for REST, GraphQL, Payments & AI models</div>
-                        </div>
-                      </a>
-                      <a href="#interactive-preview" className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-white/5 transition-colors group/item cursor-pointer">
-                        <div className="p-2 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 group-hover/item:bg-cyan-500 group-hover/item:text-white transition-colors">
-                          <FileCode2 className="w-4 h-4" />
-                        </div>
-                        <div>
-                          <div className="text-sm font-semibold text-white">Interactive API Playground</div>
-                          <div className="text-xs text-slate-400 leading-relaxed">Live request testing & multi-language SDK snippets</div>
-                        </div>
-                      </a>
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              <a href="#workflow" className="text-sm font-medium text-slate-300 hover:text-white px-3 py-1.5 rounded-full hover:bg-white/5 transition-colors cursor-pointer">
-                How It Works
-              </a>
-              <a href="#features" className="text-sm font-medium text-slate-300 hover:text-white px-3 py-1.5 rounded-full hover:bg-white/5 transition-colors cursor-pointer">
-                Features
-              </a>
-              <a href="#ai-intelligence" className="text-sm font-medium text-slate-300 hover:text-white px-3 py-1.5 rounded-full hover:bg-white/5 transition-colors cursor-pointer">
-                AI Intelligence
-              </a>
-              <a href="#comparison" className="text-sm font-medium text-slate-300 hover:text-white px-3 py-1.5 rounded-full hover:bg-white/5 transition-colors cursor-pointer">
-                Comparison
-              </a>
-              <a href="#faq" className="text-sm font-medium text-slate-300 hover:text-white px-3 py-1.5 rounded-full hover:bg-white/5 transition-colors cursor-pointer">
-                FAQ
-              </a>
-            </nav>
-          </div>
+          {/* Desktop Navigation Links - Centered via Flex Layout */}
+          <nav className="hidden md:flex items-center gap-1.5 bg-[#12131d]/60 border border-white/10 px-4 py-1.5 rounded-full backdrop-blur-sm">
+            <a href="#workflow" className="text-sm font-medium text-slate-300 hover:text-white px-3 py-1.5 rounded-full hover:bg-white/5 transition-colors cursor-pointer">
+              How It Works
+            </a>
+            <a href="#features" className="text-sm font-medium text-slate-300 hover:text-white px-3 py-1.5 rounded-full hover:bg-white/5 transition-colors cursor-pointer">
+              Features
+            </a>
+            <a href="#adaptive-templates" className="text-sm font-medium text-slate-300 hover:text-white px-3 py-1.5 rounded-full hover:bg-white/5 transition-colors cursor-pointer">
+              Templates
+            </a>
+            <a href="#ai-intelligence" className="text-sm font-medium text-slate-300 hover:text-white px-3 py-1.5 rounded-full hover:bg-white/5 transition-colors cursor-pointer">
+              AI Intelligence
+            </a>
+            <a href="#comparison" className="text-sm font-medium text-slate-300 hover:text-white px-3 py-1.5 rounded-full hover:bg-white/5 transition-colors cursor-pointer">
+              Comparison
+            </a>
+            <a href="#faq" className="text-sm font-medium text-slate-300 hover:text-white px-3 py-1.5 rounded-full hover:bg-white/5 transition-colors cursor-pointer">
+              FAQ
+            </a>
+          </nav>
 
           {/* Status & CTA Actions - Right Aligned */}
           <div className="flex items-center gap-4 shrink-0">
             {/* CTA Button (Desktop only) */}
             <a
-              href="#interactive-generator"
+              href="#workflow"
               className="hidden sm:inline-flex relative group overflow-hidden rounded-xl p-px font-medium text-sm cursor-pointer"
             >
               <span className="absolute inset-0 bg-gradient-to-r from-indigo-500 via-violet-500 to-cyan-500 group-hover:opacity-90 transition-opacity" />
@@ -161,13 +114,6 @@ export function Navbar() {
         <div className="md:hidden bg-[#0a0b12] border-b border-white/10 px-4 pt-4 pb-6 mt-3 space-y-4 shadow-2xl animate-in fade-in duration-200">
           <div className="flex flex-col space-y-2">
             <a 
-              href="#interactive-generator" 
-              onClick={() => setMobileMenuOpen(false)}
-              className="text-slate-300 hover:text-white font-medium py-2 px-3 rounded-lg hover:bg-white/5 cursor-pointer"
-            >
-              AI Documentation Engine
-            </a>
-            <a 
               href="#workflow" 
               onClick={() => setMobileMenuOpen(false)}
               className="text-slate-300 hover:text-white font-medium py-2 px-3 rounded-lg hover:bg-white/5 cursor-pointer"
@@ -179,35 +125,28 @@ export function Navbar() {
               onClick={() => setMobileMenuOpen(false)}
               className="text-slate-300 hover:text-white font-medium py-2 px-3 rounded-lg hover:bg-white/5 cursor-pointer"
             >
-              All Features
+              Features
             </a>
             <a 
               href="#adaptive-templates" 
               onClick={() => setMobileMenuOpen(false)}
               className="text-slate-300 hover:text-white font-medium py-2 px-3 rounded-lg hover:bg-white/5 cursor-pointer"
             >
-              Adaptive API Templates
+              Templates
             </a>
             <a 
               href="#ai-intelligence" 
               onClick={() => setMobileMenuOpen(false)}
               className="text-slate-300 hover:text-white font-medium py-2 px-3 rounded-lg hover:bg-white/5 cursor-pointer"
             >
-              Advanced AI Intelligence
+              AI Intelligence
             </a>
             <a 
               href="#comparison" 
               onClick={() => setMobileMenuOpen(false)}
               className="text-slate-300 hover:text-white font-medium py-2 px-3 rounded-lg hover:bg-white/5 cursor-pointer"
             >
-              Comparison vs Legacy Tools
-            </a>
-            <a 
-              href="#interactive-preview" 
-              onClick={() => setMobileMenuOpen(false)}
-              className="text-slate-300 hover:text-white font-medium py-2 px-3 rounded-lg hover:bg-white/5 cursor-pointer"
-            >
-              Interactive Live Portal
+              Comparison
             </a>
             <a 
               href="#faq" 
@@ -220,7 +159,7 @@ export function Navbar() {
 
           <div className="pt-4 border-t border-white/10 flex flex-col gap-3">
             <a
-              href="#interactive-generator"
+              href="#workflow"
               onClick={() => setMobileMenuOpen(false)}
               className="w-full text-center bg-gradient-to-r from-indigo-500 to-violet-600 text-white font-medium py-2.5 rounded-xl shadow-lg shadow-indigo-500/25 cursor-pointer"
             >

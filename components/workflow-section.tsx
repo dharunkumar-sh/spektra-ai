@@ -1,322 +1,259 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { 
-  Upload, 
-  Cpu, 
-  Briefcase, 
-  LayoutTemplate, 
-  FileCheck2, 
-  Share2, 
-  Sparkles, 
-  CheckCircle2, 
-  ArrowRight, 
-  ShieldAlert, 
-  Layers, 
-  Code, 
   GitBranch,
+  Cpu,
+  FileText,
+  Sparkles,
+  CheckCircle2,
+  ArrowRight,
   Terminal,
-  Server
+  Server,
+  Globe,
+  Play,
+  RotateCcw
 } from "lucide-react";
 
-interface PipelineStage {
-  id: number;
-  title: string;
-  subtitle: string;
-  icon: React.ComponentType<{ className?: string }>;
-  aiAnalysisPoints: string[];
-  mockup: {
-    badge: string;
-    headline: string;
-    visualContent: React.ReactNode;
-  };
-}
-
 export function WorkflowSection() {
-  const [activeStage, setActiveStage] = useState<number>(0);
+  const [githubUrl, setGithubUrl] = useState("https://github.com/spektra-ai/express-billing-api");
+  const [demoState, setDemoState] = useState<"input" | "scanning" | "done">("input");
+  const [scanLogs, setScanLogs] = useState<string[]>([]);
 
-  const STAGES: PipelineStage[] = [
-    {
-      id: 0,
-      title: "1. Upload API Specification",
-      subtitle: "Ingest any API spec format",
-      icon: Upload,
-      aiAnalysisPoints: [
-        "Normalizes OpenAPI 3.0/3.1, Swagger 2.0, Postman collections, and raw cURL snippets.",
-        "Resolves complex `$ref` schemas across remote URLs and multi-file repositories.",
-        "Validates parameter constraints, data types, and required payload bodies."
-      ],
-      mockup: {
-        badge: "Multi-Format Universal Ingestion",
-        headline: "Instant Schema Normalization & Validation",
-        visualContent: (
-          <div className="space-y-3 font-mono text-xs">
-            <div className="p-3 rounded-xl bg-black/50 border border-white/10 flex items-center justify-between text-slate-300">
-              <div className="flex items-center gap-2">
-                <Server className="w-4 h-4 text-indigo-400" />
-                <span>github.com/org/payments-api/openapi.yaml</span>
-              </div>
-              <span className="text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded text-[10px]">Synced via GitHub CI</span>
-            </div>
-            <div className="p-3 rounded-xl bg-indigo-950/30 border border-indigo-500/20 text-indigo-200">
-              <div className="font-semibold mb-1 flex items-center gap-1.5 text-indigo-300">
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>AI Pre-Flight Analysis:</span>
-              </div>
-              <ul className="list-disc list-inside space-y-1 text-slate-300 text-[11px]">
-                <li>Detected 84 endpoints across 14 resource entities.</li>
-                <li>Identified 12 polymorphic schemas (`oneOf`, `anyOf`).</li>
-                <li>Zero syntax anomalies found. Ready for neural comprehension.</li>
-              </ul>
-            </div>
-          </div>
-        )
-      }
-    },
-    {
-      id: 1,
-      title: "2. AI Understands API Architecture",
-      subtitle: "Deep structural reasoning",
-      icon: Cpu,
-      aiAnalysisPoints: [
-        "Identifies authentication boundaries (OAuth2 scopes, JWT claims, mTLS, HMAC signatures).",
-        "Maps dependencies between parent resources and nested child endpoints.",
-        "Detects rate-limiting headers (`X-RateLimit-Limit`) and pagination patterns (cursor vs offset)."
-      ],
-      mockup: {
-        badge: "Neural Semantic Parsing",
-        headline: "Extracting Architectural Topology & Security Rules",
-        visualContent: (
-          <div className="grid grid-cols-2 gap-3 text-xs">
-            <div className="p-3 rounded-xl bg-white/5 border border-white/10 space-y-1.5">
-              <div className="text-slate-400 text-[10px] uppercase font-mono">Security Topology</div>
-              <div className="font-semibold text-white flex items-center gap-1.5">
-                <ShieldAlert className="w-4 h-4 text-amber-400" />
-                <span>Dual Auth: PKCE + API Key</span>
-              </div>
-              <div className="text-slate-400 text-[11px]">Enforces scope `payments:write` on mutation endpoints.</div>
-            </div>
-            <div className="p-3 rounded-xl bg-white/5 border border-white/10 space-y-1.5">
-              <div className="text-slate-400 text-[10px] uppercase font-mono">Data Flow Pattern</div>
-              <div className="font-semibold text-white flex items-center gap-1.5">
-                <Layers className="w-4 h-4 text-cyan-400" />
-                <span>Asynchronous Webhook Events</span>
-              </div>
-              <div className="text-slate-400 text-[11px]">Identified `event.created` callbacks with HMAC-SHA256 signature headers.</div>
-            </div>
-          </div>
-        )
-      }
-    },
-    {
-      id: 2,
-      title: "3. Detects Business Context",
-      subtitle: "Organizes by developer intuition",
-      icon: Briefcase,
-      aiAnalysisPoints: [
-        "Replaces flat alphabetical lists with intuitive business domain groupings (e.g. 'Checkout Flows', 'Identity Verification').",
-        "Synthesizes natural language domain descriptions explaining *why* an endpoint exists.",
-        "Generates realistic, domain-accurate request payloads rather than generic `string` placeholders."
-      ],
-      mockup: {
-        badge: "Domain-Driven Organization",
-        headline: "From Flat CRUD Paths to Intuitive Business Workflows",
-        visualContent: (
-          <div className="space-y-2 text-xs">
-            <div className="p-2.5 rounded-lg bg-indigo-500/15 border border-indigo-500/30 flex items-center justify-between text-indigo-200">
-              <span className="font-semibold">Domain Cluster 1: Customer Lifecycle & Onboarding</span>
-              <span className="text-[10px] bg-indigo-500/30 px-2 py-0.5 rounded">12 Endpoints</span>
-            </div>
-            <div className="p-2.5 rounded-lg bg-white/5 border border-white/5 flex items-center justify-between text-slate-300">
-              <span>Domain Cluster 2: Usage-Based Metering & Invoicing</span>
-              <span className="text-[10px] bg-white/10 px-2 py-0.5 rounded">18 Endpoints</span>
-            </div>
-            <div className="p-2.5 rounded-lg bg-white/5 border border-white/5 flex items-center justify-between text-slate-300">
-              <span>Domain Cluster 3: Dispute Resolution & Chargebacks</span>
-              <span className="text-[10px] bg-white/10 px-2 py-0.5 rounded">8 Endpoints</span>
-            </div>
-          </div>
-        )
-      }
-    },
-    {
-      id: 3,
-      title: "4. Selects Smart Template",
-      subtitle: "Adapts to domain archetype",
-      icon: LayoutTemplate,
-      aiAnalysisPoints: [
-        "Dynamically selects layout structure based on API archetype (REST vs GraphQL vs AI LLM Streaming vs Fintech).",
-        "Prioritizes interactive playground for REST, schema visualizer for GraphQL, and token calculators for AI APIs.",
-        "Configures custom color palettes and typography aligned with your developer brand."
-      ],
-      mockup: {
-        badge: "Adaptive Layout Engine",
-        headline: "Selected Archetype: High-Throughput Fintech & Payment Engine",
-        visualContent: (
-          <div className="p-3 rounded-xl bg-gradient-to-r from-violet-950/40 to-indigo-950/40 border border-violet-500/30 text-xs text-slate-200 space-y-2">
-            <div className="flex items-center justify-between font-semibold">
-              <span className="text-violet-300">Template Features Activated:</span>
-              <span className="text-[10px] px-2 py-0.5 rounded bg-violet-500/20 text-violet-300">Fintech Suite v3</span>
-            </div>
-            <ul className="grid grid-cols-2 gap-2 text-[11px] text-slate-300">
-              <li className="flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> Idempotency Sandbox</li>
-              <li className="flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> Currency Precision Tables</li>
-              <li className="flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> Webhook Simulator</li>
-              <li className="flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> Multi-Language SDKs</li>
-            </ul>
-          </div>
-        )
-      }
-    },
-    {
-      id: 4,
-      title: "5. Generates Developer Docs",
-      subtitle: "Synthesizes prose, code & diagrams",
-      icon: FileCheck2,
-      aiAnalysisPoints: [
-        "Writes clear step-by-step onboarding tutorials and complete quickstart guides.",
-        "Produces Mermaid sequence diagrams illustrating multi-step transactional flows.",
-        "Compiles idiomatic code snippets in TypeScript, Python, Go, Rust, Ruby, and Java."
-      ],
-      mockup: {
-        badge: "Technical Writer in a Box",
-        headline: "Real-Time Prose Synthesis & Sequence Diagramming",
-        visualContent: (
-          <div className="p-3 rounded-xl bg-black/60 border border-white/10 font-mono text-[11px] text-indigo-300 space-y-2">
-            <div className="text-slate-400 text-[10px] border-b border-white/10 pb-1">Synthesized Mermaid Workflow Diagram:</div>
-            <pre className="text-emerald-300 leading-relaxed overflow-x-auto">
-{`sequenceDiagram
-  Client->>SpektraGateway: POST /v1/intents (Idempotency-Key)
-  SpektraGateway->>RiskEngine: Validate Fraud Score
-  RiskEngine-->>SpektraGateway: Score Approved (0.02)
-  SpektraGateway-->>Client: 201 Created (client_secret)`}
-            </pre>
-          </div>
-        )
-      }
-    },
-    {
-      id: 5,
-      title: "6. Export & Publish Anywhere",
-      subtitle: "Zero vendor lock-in",
-      icon: Share2,
-      aiAnalysisPoints: [
-        "Host directly on Spektra Edge CDN with custom domain (`docs.yourcompany.com`) and SLA.",
-        "Export clean, production-ready MDX, Markdown, or static HTML directly to your GitHub repo.",
-        "Seamlessly integrate with existing Docusaurus, Mintlify, GitBook, or Nextra setups."
-      ],
-      mockup: {
-        badge: "Omni-Channel Distribution",
-        headline: "One-Click Deploy or Git CI/CD Pull Request",
-        visualContent: (
-          <div className="grid grid-cols-3 gap-2 text-center text-xs">
-            <div className="p-2.5 rounded-xl bg-white/5 border border-white/10">
-              <div className="font-bold text-white">Spektra CDN</div>
-              <div className="text-[10px] text-emerald-400 mt-1">Global 50ms Edge</div>
-            </div>
-            <div className="p-2.5 rounded-xl bg-white/5 border border-white/10">
-              <div className="font-bold text-white">GitHub PR</div>
-              <div className="text-[10px] text-indigo-400 mt-1">Auto MDX Export</div>
-            </div>
-            <div className="p-2.5 rounded-xl bg-white/5 border border-white/10">
-              <div className="font-bold text-white">Docusaurus / Mintlify</div>
-              <div className="text-[10px] text-cyan-400 mt-1">Direct Sync</div>
-            </div>
-          </div>
-        )
-      }
-    }
-  ];
+  const runSimulation = () => {
+    setDemoState("scanning");
+    setScanLogs([]);
+    const logs = [
+      "Cloning repo: spektra-ai/express-billing-api...",
+      "Analyzing Abstract Syntax Tree (AST) of src/index.ts...",
+      "Found framework: Express.js (v4.18)",
+      "Discovered routes in controllers/billing.controller.ts:",
+      "  ➔ GET  /v1/billing/subscriptions",
+      "  ➔ POST /v1/billing/checkout",
+      "  ➔ POST /v1/billing/webhooks (HMAC Verified)",
+      "Analyzing Zod/Joi validation schemas...",
+      "Generating standard schema definitions...",
+      "Documentation compiled successfully! ✨"
+    ];
+
+    logs.forEach((log, index) => {
+      setTimeout(() => {
+        setScanLogs((prev) => [...prev, log]);
+        if (index === logs.length - 1) {
+          setTimeout(() => {
+            setDemoState("done");
+          }, 800);
+        }
+      }, index * 350);
+    });
+  };
+
+  const resetDemo = () => {
+    setDemoState("input");
+    setScanLogs([]);
+  };
 
   return (
-    <section id="workflow" className="py-24 bg-[#07080e] relative border-t border-b border-white/10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="workflow" className="py-24 bg-[#07080e] relative border-t border-b border-white/10 overflow-hidden">
+      {/* Background Glows */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-indigo-500/5 blur-[120px] rounded-full pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-500/10 border border-violet-500/20 text-xs font-semibold text-violet-400 mb-4">
-            <Layers className="w-3.5 h-3.5" />
-            <span>Intelligent Documentation Pipeline</span>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-xs font-semibold text-indigo-400 mb-4">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>Automated AI Pipeline</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight mb-4">
-            Watch an Intelligent Technical Writer at Work
+            From Code to Docs in Seconds
           </h2>
           <p className="text-base sm:text-lg text-slate-400 leading-relaxed">
-            Every stage of the Spektra AI pipeline visually demonstrates deep semantic analysis, turning raw schema files into structured, developer-delighting web portals.
+            No writing schemas or manual markdown documentation. Just connect your GitHub repo and let our AI handle the rest.
           </p>
         </div>
 
-        {/* 6-Step Workflow Selector Tabs & Interactive Inspection */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Left Column: Stage List */}
-          <div className="lg:col-span-5 space-y-3">
-            {STAGES.map((stage) => {
-              const Icon = stage.icon;
-              const isActive = activeStage === stage.id;
-              return (
-                <button
-                  key={stage.id}
-                  onClick={() => setActiveStage(stage.id)}
-                  className={`w-full text-left p-4 rounded-2xl transition-all duration-200 flex items-start gap-4 border ${
-                    isActive
-                      ? "bg-[#131424] border-indigo-500/50 shadow-xl shadow-indigo-500/10 scale-[1.01]"
-                      : "bg-white/[0.02] hover:bg-white/[0.05] border-white/5 text-slate-400"
-                  }`}
-                >
-                  <div
-                    className={`p-3 rounded-xl transition-colors ${
-                      isActive
-                        ? "bg-indigo-600 text-white shadow-lg shadow-indigo-500/30"
-                        : "bg-white/5 text-slate-400"
-                    }`}
-                  >
-                    <Icon className="w-5 h-5" />
-                  </div>
-                  <div className="flex-1">
-                    <div className={`font-bold text-sm sm:text-base ${isActive ? "text-white" : "text-slate-300"}`}>
-                      {stage.title}
-                    </div>
-                    <div className="text-xs text-slate-400 mt-0.5">{stage.subtitle}</div>
-                  </div>
-                  {isActive && <ArrowRight className="w-4 h-4 text-indigo-400 self-center" />}
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Right Column: Stage Visual Inspection Card */}
-          <div className="lg:col-span-7 bg-[#0d0e16] border border-white/15 rounded-3xl p-6 sm:p-8 shadow-2xl relative">
-            <div className="flex items-center justify-between mb-4">
-              <span className="text-xs font-mono uppercase tracking-widest text-indigo-400 font-bold bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">
-                {STAGES[activeStage].mockup.badge}
-              </span>
-              <span className="text-xs font-mono text-slate-500">Stage 0{activeStage + 1} / 06</span>
-            </div>
-
-            <h3 className="text-2xl font-bold text-white mb-6">
-              {STAGES[activeStage].mockup.headline}
-            </h3>
-
-            {/* What AI is Analyzing Box */}
-            <div className="bg-[#141524] rounded-2xl p-5 border border-white/10 mb-6">
-              <div className="text-xs font-semibold text-slate-300 uppercase tracking-wider mb-3 flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-indigo-400" />
-                <span>What Spektra AI is Actively Analyzing:</span>
+        {/* Workflow Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          {/* Left Side: 3 Steps Description */}
+          <div className="lg:col-span-5 space-y-8">
+            
+            {/* Step 1 */}
+            <div className="flex gap-4 items-start">
+              <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 font-bold text-sm">
+                1
               </div>
-              <ul className="space-y-2.5">
-                {STAGES[activeStage].aiAnalysisPoints.map((point, idx) => (
-                  <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-300 leading-relaxed">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                    <span>{point}</span>
-                  </li>
-                ))}
-              </ul>
+              <div>
+                <h3 className="text-lg font-bold text-white mb-2 flex items-center gap-2">
+                  <GitBranch className="w-4 h-4 text-indigo-400" />
+                  Paste GitHub Link
+                </h3>
+                <p className="text-sm text-slate-400 leading-relaxed">
+                  Provide any public or private repository URL. No config files or modifications are needed in your codebase.
+                </p>
+              </div>
             </div>
 
-            {/* Visual Output Mockup */}
-            <div className="bg-[#080910] rounded-2xl p-4 border border-white/10 shadow-inner">
-              <div className="text-[10px] font-mono text-slate-400 uppercase mb-3">Live Stage Artifact Output</div>
-              {STAGES[activeStage].mockup.visualContent}
+            {/* Step 2 */}
+            <div className="flex gap-4 items-start">
+              <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 font-bold text-sm">
+                2
+              </div>
+              <div>
+                <h3 className="text-lg font-bold text-white mb-2 flex items-center gap-2">
+                  <Cpu className="w-4 h-4 text-indigo-400" />
+                  AI Codebase Scan
+                </h3>
+                <p className="text-sm text-slate-400 leading-relaxed">
+                  Spektra scans your files, detects routing frameworks (Express, Django, Spring Boot, etc.), maps dependencies, and parses validation logic.
+                </p>
+              </div>
+            </div>
+
+            {/* Step 3 */}
+            <div className="flex gap-4 items-start">
+              <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 font-bold text-sm">
+                3
+              </div>
+              <div>
+                <h3 className="text-lg font-bold text-white mb-2 flex items-center gap-2">
+                  <FileText className="w-4 h-4 text-indigo-400" />
+                  Ready-to-Use API Portal
+                </h3>
+                <p className="text-sm text-slate-400 leading-relaxed">
+                  Instantly outputs beautiful, interactive documentation featuring complete request parameters, response structures, and type-safe code snippets.
+                </p>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Right Side: Interactive Simulation Widget */}
+          <div className="lg:col-span-7 bg-[#0b0c15] border border-white/10 rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
+            <div className="absolute top-0 right-0 p-4">
+              <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+            </div>
+
+            {/* Widget Header */}
+            <div className="border-b border-white/5 pb-4 mb-6 flex justify-between items-center">
+              <span className="text-xs font-mono uppercase tracking-wider text-slate-500">Live AI Pipeline Demo</span>
+              {demoState !== "input" && (
+                <button 
+                  onClick={resetDemo}
+                  className="text-xs text-indigo-400 hover:text-indigo-300 flex items-center gap-1.5 transition-colors font-semibold"
+                >
+                  <RotateCcw className="w-3.5 h-3.5" />
+                  Reset
+                </button>
+              )}
+            </div>
+
+            {/* Interactive Panel Content */}
+            <div className="min-h-[280px] flex flex-col justify-center">
+              
+              {/* STATE 1: Input URL */}
+              {demoState === "input" && (
+                <div className="space-y-6">
+                  <div className="text-center space-y-2">
+                    <h4 className="text-lg font-bold text-white">Experience the Pipeline</h4>
+                    <p className="text-xs text-slate-400 max-w-md mx-auto">
+                      Click the button below to watch Spektra AI scan the repository and build an API portal.
+                    </p>
+                  </div>
+                  
+                  <div className="flex flex-col sm:flex-row gap-2 max-w-lg mx-auto">
+                    <div className="flex-1 bg-black/40 border border-white/10 rounded-xl px-4 py-3 flex items-center gap-2">
+                      <GitBranch className="w-4 h-4 text-slate-500" />
+                      <input 
+                        type="text" 
+                        value={githubUrl}
+                        onChange={(e) => setGithubUrl(e.target.value)}
+                        className="bg-transparent border-none text-xs text-white focus:outline-none w-full font-mono"
+                        placeholder="https://github.com/your-username/your-repo"
+                      />
+                    </div>
+                    <button 
+                      onClick={runSimulation}
+                      className="bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl px-5 py-3 text-xs font-bold transition-all flex items-center justify-center gap-2 shadow-lg shadow-indigo-500/20"
+                    >
+                      <Play className="w-3.5 h-3.5 fill-current" />
+                      Analyze Repo
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {/* STATE 2: AI Code Scan Terminal */}
+              {demoState === "scanning" && (
+                <div className="bg-black/50 border border-white/5 rounded-2xl p-4 font-mono text-[11px] leading-relaxed text-indigo-300 min-h-[240px] flex flex-col justify-end">
+                  <div className="flex items-center gap-2 text-slate-500 mb-auto pb-2 border-b border-white/5">
+                    <Terminal className="w-3.5 h-3.5" />
+                    <span>spektra-engine ~ router-discovery-pipeline</span>
+                  </div>
+                  <div className="space-y-1.5 mt-4">
+                    {scanLogs.map((log, index) => (
+                      <div key={index} className="flex gap-2">
+                        <span className="text-slate-500 select-none">$</span>
+                        <span className={log.includes("successfully") ? "text-emerald-400 font-bold" : "text-slate-300"}>
+                          {log}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* STATE 3: Ready-to-Use Docs Generated */}
+              {demoState === "done" && (
+                <div className="space-y-4 animate-fadeIn">
+                  <div className="flex items-center gap-2 text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-2 rounded-xl text-xs max-w-fit mx-auto mb-2">
+                    <CheckCircle2 className="w-4 h-4" />
+                    <span className="font-bold">API Documentation Ready!</span>
+                  </div>
+
+                  {/* Generated Docs Interface Mockup */}
+                  <div className="bg-[#07080e] border border-white/10 rounded-2xl overflow-hidden shadow-inner">
+                    {/* Fake Browser Bar */}
+                    <div className="bg-[#0b0c15] px-4 py-2 border-b border-white/5 flex items-center gap-1.5">
+                      <div className="w-2.5 h-2.5 rounded-full bg-rose-500/50" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-amber-500/50" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/50" />
+                      <span className="text-[10px] text-slate-500 font-mono ml-4">docs.spektra.ai/v1/billing</span>
+                    </div>
+
+                    <div className="p-4 space-y-3.5">
+                      {/* Route Header */}
+                      <div className="flex items-center gap-3">
+                        <span className="px-2 py-0.5 bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 rounded text-[10px] font-bold font-mono">POST</span>
+                        <span className="text-xs font-mono text-white font-semibold">/v1/billing/checkout</span>
+                      </div>
+
+                      <p className="text-[11px] text-slate-400">
+                        Initiate a subscription checkout flow. Supports cards, apple-pay, and custom payment processors.
+                      </p>
+
+                      {/* Request Schema Table */}
+                      <div className="border border-white/5 rounded-lg overflow-hidden bg-black/20 text-[10px]">
+                        <div className="bg-white/5 px-3 py-1.5 font-bold text-slate-300 border-b border-white/5">Request Parameters</div>
+                        <div className="p-2.5 space-y-2">
+                          <div className="flex justify-between border-b border-white/5 pb-1.5">
+                            <span className="font-mono text-indigo-300 font-semibold">customer_id <span className="text-rose-400">*</span></span>
+                            <span className="text-slate-500">string (UUID)</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="font-mono text-indigo-300 font-semibold">plan_id <span className="text-rose-400">*</span></span>
+                            <span className="text-slate-500">string (prod_xxxx)</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
             </div>
           </div>
+
         </div>
       </div>
     </section>

@@ -12,53 +12,23 @@ interface FaqItem {
 const FAQS: FaqItem[] = [
   {
     category: "Compatibility",
-    question: "What API specification formats does Spektra AI support?",
-    answer: "Spektra AI natively ingests OpenAPI 3.0, OpenAPI 3.1, Swagger 2.0, Postman Collection v2.1, asyncAPI, and even raw cURL request bundles or unannotated GitHub route repositories. Our normalizer automatically parses and resolves remote `$ref` schemas across multi-file repositories."
+    question: "What frameworks does Spektra AI support?",
+    answer: "Spektra AI natively supports popular backend web frameworks including Node.js (Express, Fastify, NestJS), Python (FastAPI, Django, Flask), Go, and Spring Boot. It auto-detects route files, controller files, and validation middleware."
   },
   {
-    category: "Compatibility",
-    question: "How does Spektra AI analyze private GitHub repositories without exposing code?",
-    answer: "When connected via our GitHub App, Spektra AI strictly scans route decorators, schema definitions, and OpenAPI artifacts. We never store raw proprietary application logic. Our CI/CD GitHub Action runs inside your own runner, transmitting only abstract AST signatures to the synthesis engine."
+    category: "Security & Privacy",
+    question: "How does Spektra AI scan private GitHub repositories securely?",
+    answer: "When connected via our secure GitHub integration, Spektra AI strictly parses route decorators, controllers, and validation schemas (Zod, Pydantic, etc.). We never store or retain your raw proprietary source code or business logic."
   },
   {
-    category: "AI Accuracy",
-    question: "How accurate is the AI at understanding complex financial or healthcare business logic?",
-    answer: "Spektra AI utilizes specialized neural architectures trained on millions of high-grade technical documentation pages. In addition to syntactic parsing, it cross-references industry domain ontologies (such as HIPAA FHIR R4 or PCI DSS billing standards) to ensure zero hallucination of parameter types or auth requirements."
+    category: "Export & Customization",
+    question: "Can we export the generated documentation?",
+    answer: "Yes. In addition to high-speed hosting on our CDN, you can export your fully compiled documentation as clean Markdown, MDX, or static HTML to sync with your existing Docusaurus, Mintlify, or GitBook setups."
   },
   {
-    category: "Security",
-    question: "Are our proprietary API schemas used to train public AI models?",
-    answer: "Never. All customer data, API specifications, and generated documentation are processed under strict zero-retention privacy agreements. Your API structures are isolated to your workspace tenant and are never shared with OpenAI or third-party training pipelines."
-  },
-  {
-    category: "Customization",
-    question: "Can we export generated docs to our existing Mintlify, Docusaurus, or Nextra setup?",
-    answer: "Yes! While Spektra AI offers ultra-fast edge CDN hosting (`docs.yourcompany.com`), you can export clean, un-opinionated Markdown, MDX, static HTML, or structured JSON directly via our API or automated GitHub PR workflows."
-  },
-  {
-    category: "Collaboration",
-    question: "How do technical writers and backend engineers collaborate inside Spektra AI?",
-    answer: "Our built-in Review Workspace lets backend engineers trigger automated doc updates via git commits, while technical writers review inline AI reasoning explanations, tweak prose wording, and approve staging builds before one-click deployment to production."
-  },
-  {
-    category: "Hosting",
-    question: "Can we self-host Spektra AI inside our AWS, GCP, or Azure VPC?",
-    answer: "Yes. Our Enterprise tier includes packaged Helm charts and Docker containers for deployment inside Kubernetes clusters or air-gapped private networks, ensuring your internal enterprise microservice docs never leave your firewall."
-  },
-  {
-    category: "Features",
-    question: "Does Spektra AI generate interactive API playgrounds?",
-    answer: "Absolutely. Every generated documentation portal includes an interactive request console featuring customizable headers, auth token injection, payload formatting validation, and simulated or live sandbox execution."
-  },
-  {
-    category: "Versioning",
-    question: "How does Spektra handle API versioning and deprecation workflows?",
-    answer: "Spektra AI automatically diffs consecutive OpenAPI spec uploads, generating human-readable changelogs and flagging deprecated fields. Users can toggle between semantic versions (e.g. `v1.8 LTS` vs `v2.0 Beta`) with automatic URL routing."
-  },
-  {
-    category: "Security",
-    question: "Is Spektra AI compliant with SOC 2 Type II and GDPR?",
-    answer: "Yes. Spektra AI maintains continuous SOC 2 Type II compliance, ISO 27001 certification, full GDPR compliance with EU data residency options, and offers Business Associate Agreements (BAA) for HIPAA regulated healthcare organizations."
+    category: "Automation",
+    question: "How does the API documentation stay up-to-date?",
+    answer: "Spektra AI integrates directly into your CI/CD pipelines. Every time you push new code or merge a pull request to your main branch, Spektra automatically rescans your routes and updates your API reference portal in real time."
   }
 ];
 
